@@ -2,19 +2,29 @@
 <div>
   <HeaderComp @searchData="metodoSearch" />
   <main>
+
     <div>
           <span>Film</span>
             <FilmCard
               v-for="(element, index) in filmData"
               v-bind:key="index"
+              :titolo="element.original_title"
+              :titolo2="element.title"
+              :lingua="element.original_language"
+              :voto="element.vote_average"
           />
     </div>
-
+      <br><br>
     <div>
             <span>Serie tv</span>
             <TvCard
             v-for="(element, index) in tvData"
-              v-bind:key="index"/>
+            v-bind:key="index"
+              :titolo="element.original_title"
+              :titolo2="element.title"
+              :lingua="element.original_language"
+              :voto="element.vote_average"
+              />
     </div>
 
   </main>

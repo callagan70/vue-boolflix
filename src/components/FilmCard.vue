@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <!--inserire contenuto componente-->
-    ciao
+  <div id="card">
+    <h3>{{titolo}}</h3>
+    <h3>{{titolo2}}</h3>
+    <h4>{{lingua}}</h4>
+    <h4>{{voto}}</h4>
   </div>
 </template>
 
@@ -9,9 +11,17 @@
 export default {
   //Cambiare il nome con quello del componente creato
   name: 'FilmCard',
+
+    props: {
+    titolo: String,
+    titolo2: String,
+    lingua: String,
+    voto: String,
+  }
+
 }
 </script>
 
 <style scoped lang="scss">
- /*Inserire style componente*/
-</style>div
+
+</style>
