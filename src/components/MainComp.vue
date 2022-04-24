@@ -1,9 +1,8 @@
 <template>
-  <header>
-    ciao
+  <div>
     <FilmCard />
     <TvCard />
-  </header>
+  </div>
 </template>
 
 <script>
@@ -11,7 +10,6 @@ import FilmCard from '../components/partial/FilmCard.vue'
 import TvCard from '../components/partial/TvCard.vue'
 
 export default {
-  //Cambiare il nome con quello del componente creato
   name: 'MainComp',
 
 components: {

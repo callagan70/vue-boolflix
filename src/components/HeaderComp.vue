@@ -1,4 +1,5 @@
 <template>
+  
   <div id="header">
       <div>BoolFlix</div>
       <div>
@@ -6,23 +7,26 @@
         <button 
           type="submit"
           class="bottoneSearch"
-          @click.prevent="$emit('searchData', searchText)"
+          @click="$emit('searchData', searchText)"
         >Cerca</button>
       </div>
   </div>
+
 </template>
 
 <script>
 export default {
   name: 'HeaderComp',
 
-
-data () {
-  return {
-    searchText: ' ',}},
+  data (){
+    return {
+      searchText: '',
+      }},
 
 }
-console.log(searchText)
+
+// console.log(searchText)
+
 </script>
 
 <style scoped lang="scss">
