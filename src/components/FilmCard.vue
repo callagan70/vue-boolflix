@@ -1,17 +1,17 @@
 <template>
-  <header>
+  <div>
     <!--inserire contenuto componente-->
     ciao
-  </header>
+  </div>
 </template>
 
 <script>
 export default {
   //Cambiare il nome con quello del componente creato
-  name: 'TvCard',
+  name: 'FilmCard',
 }
 </script>
 
 <style scoped lang="scss">
  /*Inserire style componente*/
-</style>
+</style>div

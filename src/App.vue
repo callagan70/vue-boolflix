@@ -1,18 +1,37 @@
 <template>
 <div>
   <HeaderComp @searchData="metodoSearch" />
-  <MainComp />
+  <main>
+    <div>
+          <span>Film</span>
+            <FilmCard
+              v-for="(element, index) in filmData"
+              v-bind:key="index"
+          />
+    </div>
+
+    <div>
+            <span>Serie tv</span>
+            <TvCard
+            v-for="(element, index) in tvData"
+              v-bind:key="index"/>
+    </div>
+
+  </main>
+  <!-- <MainComp /> -->     
 </div>
 </template>
 
 <script>
 import HeaderComp from './components/HeaderComp.vue'
-import MainComp from './components/MainComp.vue'
+import FilmCard from './components/FilmCard.vue'
+import TvCard from './components/TvCard.vue'
 
 export default {
   components: {
     HeaderComp,
-    MainComp,
+    TvCard,
+    FilmCard
    },
 
   data(){
@@ -238,5 +257,15 @@ export default {
 *{padding: 0;
 margin: 0;
 box-sizing: border-box}
+
+main{
+      width: 100%;
+      height: 93vh;
+      background-color: grey;
+      padding: 100px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 800;
+}
 
 </style>

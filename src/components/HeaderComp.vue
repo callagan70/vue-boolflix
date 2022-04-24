@@ -2,11 +2,11 @@
   
   <div id="header">
       <div>BoolFlix</div>
-      <div>
+
+      <div class="bottoneSearch">
         <input type="text" v-model="searchText">
         <button 
           type="submit"
-          class="bottoneSearch"
           @click="$emit('searchData', searchText)"
         >Cerca</button>
       </div>
@@ -22,10 +22,9 @@ export default {
     return {
       searchText: '',
       }},
-
 }
 
-// console.log(searchText)
+
 
 </script>
 
@@ -42,5 +41,24 @@ export default {
   font-family: Arial, Helvetica, sans-serif;
   text-size-adjust: 800;
   font-size: 2em;
+
+  .bottoneSearch{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+
+
+  }
+
+  .bottoneSearch>button{
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    margin-left: 1em;
+    border-radius: 10px;
+  }
+    
 }
 </style>
