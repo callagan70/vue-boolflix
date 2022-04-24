@@ -6,11 +6,10 @@
 </template>
 
 <script>
- import HeaderComp from './components/HeaderComp.vue';
+ import HeaderComp from './components/HeaderComp.vue'
  import MainComp from './components/MainComp.vue'
 
-  export default {
-
+export default {
   components: {
      HeaderComp,
      MainComp,
@@ -26,7 +25,7 @@
     //   this.TxtSearch = testo
     //     console.log(testo)
     //   }
-    },
+    // },
  }
 </script>
 

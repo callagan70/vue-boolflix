@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <div id="header">
       <div>BoolFlix</div>
       <div>
         <input type="text" v-model="searchText">
@@ -9,7 +9,7 @@
           @click.prevent="$emit('searchData', searchText)"
         >Cerca</button>
       </div>
-  </header>
+  </div>
 </template>
 
 <script>
