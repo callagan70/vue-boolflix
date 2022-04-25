@@ -1,19 +1,22 @@
 <template>
 <div>
-  <HeaderComp  />
+  <HeaderComp  
+    @searchData="metodoSearch"
+  />
   <!-- @searchData="metodoSearch" -->
   <main>
           <span>Film</span>
     <div class="movie_card">
 
             <FilmCard
-              v-for="(element, index) in filmData"
+              v-for="(element, index) in filteredCards()"
               :key="index"
               :titolo="element.original_title"
               :titolo2="element.title"
               :lingua="element.original_language"
               :voto="element.vote_average"
           />
+
     </div>
       <!-- <br><br> -->
           <span>Serie tv</span>
@@ -270,25 +273,36 @@ export default {
   },
 
     methods: {
-         metodoSearch( testo ){
+      metodoSearch( testo ){
             this.TxtSearch = testo
             console.log('Testo in ricerca: ' + this.TxtSearch)
        },
+
+    filteredCards(){
+         if( this.TxtSearch === ''){
+           return this.filmData
+         }
+       else{
+         return this.filmData.filter( (elem) => {
+           return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+         } )
+       }
+     },
   },
+// NOTE non me lo usa come computed
 
-//  Computed: {
-//       filteredCards(){
-//         if( this.TxtSearch === ''){
-//           return this.filteredCards
-//         }
-
-//       else{
-//         return this.filteredCards.filter( (elem) => {
-//           return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
-//         } )
-//       }
-//     },
-//   },
+  // Computed: {
+  //      filteredCards(){
+  //        if( this.TxtSearch === ''){
+  //          return this.filmData
+  //        }
+  //      else{
+  //        return this.filmData.filter( (elem) => {
+  //          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+  //        } )
+  //      }
+  //    },
+  //  },
 }
 </script>
 
