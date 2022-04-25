@@ -1,22 +1,24 @@
 <template>
 <div>
-  <HeaderComp @searchData="metodoSearch" />
+  <HeaderComp  />
+  <!-- @searchData="metodoSearch" -->
   <main>
-
-    <div>
           <span>Film</span>
+    <div class="movie_card">
+
             <FilmCard
               v-for="(element, index) in filmData"
-              v-bind:key="index"
+              :key="index"
               :titolo="element.original_title"
               :titolo2="element.title"
               :lingua="element.original_language"
               :voto="element.vote_average"
           />
     </div>
-      <br><br>
-    <div>
-            <span>Serie tv</span>
+      <!-- <br><br> -->
+          <span>Serie tv</span>
+    <div class="movie_card">
+
             <TvCard
             v-for="(element, index) in tvData"
             v-bind:key="index"
@@ -36,6 +38,7 @@
 import HeaderComp from './components/HeaderComp.vue'
 import FilmCard from './components/FilmCard.vue'
 import TvCard from './components/TvCard.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -47,6 +50,8 @@ export default {
   data(){
     return{
     TxtSearch: '',
+    filmCards: [],
+
     filmData: [
 {
 "adult": false,
@@ -250,16 +255,41 @@ export default {
 
   }},
 
-     methods: {
+    created(){
+    axios.get( 'https://api.themoviedb.org/3/movie/550?api_key=6eadd5a081c4535630e8571051049891' )
+         .then( ( res )=>{
+           console.log(res.data );
+           this.filmCards = res.data
+          console.log(this.filmCards );
+          console.log(this.filmCards.original_title)
+          //  this.Cards = false
+         } )
+         .catch( (error) => {
+           console.log( error )
+         } )
+  },
+
+    methods: {
          metodoSearch( testo ){
             this.TxtSearch = testo
-         console.log(testo)
-         console.log(this.TxtSearch)
-       }
-     },
+            console.log('Testo in ricerca: ' + this.TxtSearch)
+       },
+  },
 
+//  Computed: {
+//       filteredCards(){
+//         if( this.TxtSearch === ''){
+//           return this.filteredCards
+//         }
 
- }
+//       else{
+//         return this.filteredCards.filter( (elem) => {
+//           return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+//         } )
+//       }
+//     },
+//   },
+}
 </script>
 
 <style lang="scss">
@@ -276,6 +306,22 @@ main{
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 800;
+
+
+}
+
+      main>span{
+
+        color: red;
+        font-size: 2em;
+      }
+
+.movie_card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+        margin-top: 1em;
+        margin-bottom: 1em;
 }
 
 </style>

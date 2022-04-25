@@ -16,11 +16,19 @@ export default {
     titolo: String,
     titolo2: String,
     lingua: String,
-    voto: String,
+    voto: Number,
   }
 }
 </script>
 
 <style scoped lang="scss">
+
+      #card{
+          width: 200px;
+          text-align: center;
+          background: black;
+
+
+      }
 
 </style>

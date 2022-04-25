@@ -1,9 +1,9 @@
 <template>
   <div id="card">
-    <h3>{{titolo}}</h3>
-    <h3>{{titolo2}}</h3>
-    <h4>{{lingua}}</h4>
-    <h4>{{voto}}</h4>
+          <h3>{{titolo}}</h3>
+          <h3>{{titolo2}}</h3>
+          <h4>{{lingua}}</h4>
+          <h4>{{voto}}</h4>
   </div>
 </template>
 
@@ -16,12 +16,26 @@ export default {
     titolo: String,
     titolo2: String,
     lingua: String,
-    voto: String,
+    voto: Number,
+  },
+
+  data(){
+    return{
+              
+    }
   }
 
 }
 </script>
 
 <style scoped lang="scss">
+
+      #card{
+          width: 200px;
+          text-align: center;
+          background: black;
+
+
+      }
 
 </style>
