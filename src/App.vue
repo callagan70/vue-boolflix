@@ -3,13 +3,12 @@
   <HeaderComp  
     @searchData="metodoSearch"
   />
-  <!-- @searchData="metodoSearch" -->
   <main>
           <span>Film</span>
     <div class="movie_card">
 
             <FilmCard
-              v-for="(element, index) in filmData"
+              v-for="(element, index) in filmCards"
               :key="index"
               :titolo="element.original_title"
               :titolo2="element.title"
@@ -33,7 +32,7 @@
     </div>
 
   </main>
-  <!-- <MainComp /> -->     
+
 </div>
 
 <!-- NOTE per le carte 3D https://www.w3schools.com/howto/howto_css_flip_card.asp -->
@@ -52,6 +51,7 @@ export default {
     FilmCard
    },
 
+
   data(){
     return{
     TxtSearch: '',
@@ -59,8 +59,7 @@ export default {
     filmCards: [],
     TvCards:[],
     ApiSearch: '',
-
-    filmData: [
+       filmData: [
 {
 "adult": false,
 "backdrop_path": "/jA09e9RryWU4zKOTxTDKVbnFHlE.jpg",
@@ -260,103 +259,58 @@ export default {
 "vote_count": 8590
 }
 ],
-
-  }},
-
-  //   created(){
-  //   axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en&query=Star&page=1' )
-  //        .then( ( res )=>{
-  //          console.log(res.data.results );
-  //          this.filmCards = res.data.results
-  //         console.log(this.filmCards );
-  //         console.log(this.filmCards[0].original_title)
-  //         //  this.Cards = false
-  //        } )
-  //        .catch( (error) => {
-  //          console.log( error )
-  //        } )
-  // },
-
-methods: {
-  metodoSearch( testo ){
-            this.TxtSearch = testo
-            // console.log('Testo in ricerca: ' + this.TxtSearch)
-       },
-
-  filteredMovies(){
-      // this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
-      // console.log(this.ApiSearch)
-
-    axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
-        .then( ( res )=>{
-           console.log(res.data.results );
-           this.filmCards = res.data.results
-          console.log(this.filmCards );
-          console.log(this.filmCards[0].original_title)
-         } )
-
-        .catch( (error) => {
-            console.log( error )
-          } )
-
-         if( this.TxtSearch === ''){
-           return this.filmCards
-         }
-        else{
-         return this.filmCards.filter( (elem) => {
-           return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
-         } )
-       }
-     },
-
- filteredTv(){
-    //  this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
-    //  console.log(this.ApiSearch)
-
-   axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
-      .then( ( res )=>{
-          console.log(res.data.results );
-          this.TvCards = res.data.results
-         console.log(this.TvCards[0].name)
-        } )
-      .catch( (error) => {
-           console.log( error )
-         } )
-
-        if( this.TxtSearch === ''){
-        return this.TvCards
-        }
-        else{
-        return this.TvCards.filter( (elem) => {
-          return elem.name.toLowerCase().includes(this.TxtSearch.toLowerCase())
-       } )
-      }
-    },
-  },
-// NOTE non me lo usa come computed
-// FIXME da capire come usare il computed
-
-  computed: {
-
-
   }
+},
 
+created(){
+   axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1' )
+        .then( ( res )=>{
+          this.filmCards = res.data.results
+            console.log(this.filmCards );
+            console.log(this.filmCards[2].original_title)
+         //  this.Cards = false
+        } )
+        .catch( (error) => {
+          console.log( error )
+        } )
+ },
+
+
+
+// !SECTION Fine Export default
 }
-
-  // computed: {
-  //      filteredCards(){
-  //        if( this.TxtSearch === ''){
-  //          return this.filmData
-  //        }
-  //      else{
-  //        return this.filmData.filter( (elem) => {
-  //          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
-  //        } )
-  //      }
-  //    },
-  //  },
-
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style lang="scss">
 
