@@ -23,10 +23,10 @@
     <div class="movie_card">
 
             <TvCard
-            v-for="(element, index) in tvData"
+            v-for="(element, index) in filteredTv()"
             v-bind:key="index"
-              :titolo="element.original_title"
-              :titolo2="element.title"
+              :titolo="element.name"
+              :titolo2="element.original_name"
               :lingua="element.original_language"
               :voto="element.vote_average"
               />
@@ -277,7 +277,7 @@ export default {
   //        } )
   // },
 
-    methods: {
+methods: {
 
   metodoSearch( testo ){
             this.TxtSearch = testo
@@ -285,66 +285,54 @@ export default {
        },
 
   filteredMovies(){
-      this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
-      console.log(this.ApiSearch)
+      // this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
+      // console.log(this.ApiSearch)
 
     axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
-         .then( ( res )=>{
+        .then( ( res )=>{
            console.log(res.data.results );
            this.filmCards = res.data.results
           console.log(this.filmCards );
           console.log(this.filmCards[0].original_title)
          } )
 
-    //  axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1' )
-    //       .then( ( res )=>{
-    //         console.log(res.data.results );
-    //         this.TvCards = res.data.results
-    //        console.log(this.TvCards );
-    //        console.log(this.TvCards[0].name)
-    //        //  this.Cards = false
-    //       } )
-
-          .catch( (error) => {
+        .catch( (error) => {
             console.log( error )
           } )
 
          if( this.TxtSearch === ''){
            return this.filmCards
          }
-       else{
+        else{
          return this.filmCards.filter( (elem) => {
            return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
          } )
        }
      },
 
-  // filteredTv(){
-  //     this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
-  //     console.log(this.ApiSearch)
+ filteredTv(){
+    //  this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
+    //  console.log(this.ApiSearch)
 
-  //   axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
-  //        .then( ( res )=>{
-  //          console.log(res.data.results );
-  //          this.filmCards = res.data.results
-  //         console.log(this.filmCards );
-  //         console.log(this.filmCards[0].original_title)
-  //        } )
-  //         .catch( (error) => {
-  //           console.log( error )
-  //         } )
+   axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
+      .then( ( res )=>{
+          console.log(res.data.results );
+          this.TvCards = res.data.results
+         console.log(this.TvCards[0].name)
+        } )
+      .catch( (error) => {
+           console.log( error )
+         } )
 
-  //        if( this.TxtSearch === ''){
-  //          return this.filmCards
-  //        }
-  //      else{
-  //        return this.filmCards.filter( (elem) => {
-  //          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
-  //        } )
-  //      }
-  //    },
-
-
+        if( this.TxtSearch === ''){
+        return this.TvCards
+        }
+        else{
+        return this.TvCards.filter( (elem) => {
+          return elem.name.toLowerCase().includes(this.TxtSearch.toLowerCase())
+       } )
+      }
+    },
   },
 // NOTE non me lo usa come computed
 // FIXME da capire come usare il computed
@@ -353,6 +341,9 @@ export default {
 
 
   }
+
+}
+
   // computed: {
   //      filteredCards(){
   //        if( this.TxtSearch === ''){
@@ -365,7 +356,7 @@ export default {
   //      }
   //    },
   //  },
-}
+
 </script>
 
 <style lang="scss">
@@ -382,20 +373,17 @@ main{
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 800;
-
-
 }
 
-      main>span{
-
-        color: red;
-        font-size: 2em;
-      }
+main>span{
+  color: red;
+  font-size: 2em;
+}
 
 .movie_card{
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 1em;
   margin-bottom: 1em;
 }

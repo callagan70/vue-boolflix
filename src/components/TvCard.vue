@@ -23,12 +23,5 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/style/cardstyle.scss'
-      // #card{
-      //     width: 200px;
-      //     text-align: center;
-      //     background: black;
-
-
-      // }
 
 </style>
