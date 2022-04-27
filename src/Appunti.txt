@@ -1,0 +1,8 @@
+  //  filtraggio(){
+  //     if( this.TxtSearch === '' ){
+  //       return this.filmCards
+  //     } else{
+  //       return this.filmCards.filter( (elem) => {
+  //         return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+  //       } )
+  //     }
