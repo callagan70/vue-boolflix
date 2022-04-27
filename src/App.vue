@@ -9,7 +9,7 @@
     <div class="movie_card">
 
             <FilmCard
-              v-for="(element, index) in filteredMovies()"
+              v-for="(element, index) in filmData"
               :key="index"
               :titolo="element.original_title"
               :titolo2="element.title"
@@ -23,7 +23,7 @@
     <div class="movie_card">
 
             <TvCard
-            v-for="(element, index) in filteredTv()"
+            v-for="(element, index) in tvData"
             v-bind:key="index"
               :titolo="element.name"
               :titolo2="element.original_name"
@@ -278,7 +278,6 @@ export default {
   // },
 
 methods: {
-
   metodoSearch( testo ){
             this.TxtSearch = testo
             // console.log('Testo in ricerca: ' + this.TxtSearch)
