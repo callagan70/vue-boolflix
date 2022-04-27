@@ -4,10 +4,15 @@
       <div>BoolFlix</div>
 
       <div class="bottoneSearch">
-        <input type="text" v-model="searchText">
+        <input 
+          type="text" 
+          v-model="searchText"
+          @keydown.enter.prevent="$emit('searchData', searchText)"
+          >
+          <!-- NOTE Utiliziamo il keydown e non il keyup perché il secondo ha problemi con il prevent -->
         <button 
           type="submit"
-          @click="$emit('searchData', searchText)"
+          @click.prevent="$emit('searchData', searchText)"
         >Cerca</button>
       </div>
   </div>

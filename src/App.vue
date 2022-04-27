@@ -9,7 +9,7 @@
     <div class="movie_card">
 
             <FilmCard
-              v-for="(element, index) in filteredCards()"
+              v-for="(element, index) in filteredMovies()"
               :key="index"
               :titolo="element.original_title"
               :titolo2="element.title"
@@ -35,6 +35,8 @@
   </main>
   <!-- <MainComp /> -->     
 </div>
+
+<!-- NOTE per le carte 3D https://www.w3schools.com/howto/howto_css_flip_card.asp -->
 </template>
 
 <script>
@@ -53,7 +55,10 @@ export default {
   data(){
     return{
     TxtSearch: '',
+    ApiKey: '6eadd5a081c4535630e8571051049891',
     filmCards: [],
+    TvCards:[],
+    ApiSearch: '',
 
     filmData: [
 {
@@ -258,40 +263,97 @@ export default {
 
   }},
 
-    created(){
-    axios.get( 'https://api.themoviedb.org/3/movie/550?api_key=6eadd5a081c4535630e8571051049891' )
-         .then( ( res )=>{
-           console.log(res.data );
-           this.filmCards = res.data
-          console.log(this.filmCards );
-          console.log(this.filmCards.original_title)
-          //  this.Cards = false
-         } )
-         .catch( (error) => {
-           console.log( error )
-         } )
-  },
+  //   created(){
+  //   axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en&query=Star&page=1' )
+  //        .then( ( res )=>{
+  //          console.log(res.data.results );
+  //          this.filmCards = res.data.results
+  //         console.log(this.filmCards );
+  //         console.log(this.filmCards[0].original_title)
+  //         //  this.Cards = false
+  //        } )
+  //        .catch( (error) => {
+  //          console.log( error )
+  //        } )
+  // },
 
     methods: {
-      metodoSearch( testo ){
+
+  metodoSearch( testo ){
             this.TxtSearch = testo
-            console.log('Testo in ricerca: ' + this.TxtSearch)
+            // console.log('Testo in ricerca: ' + this.TxtSearch)
        },
 
-    filteredCards(){
+  filteredMovies(){
+      this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
+      console.log(this.ApiSearch)
+
+    axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
+         .then( ( res )=>{
+           console.log(res.data.results );
+           this.filmCards = res.data.results
+          console.log(this.filmCards );
+          console.log(this.filmCards[0].original_title)
+         } )
+
+    //  axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1' )
+    //       .then( ( res )=>{
+    //         console.log(res.data.results );
+    //         this.TvCards = res.data.results
+    //        console.log(this.TvCards );
+    //        console.log(this.TvCards[0].name)
+    //        //  this.Cards = false
+    //       } )
+
+          .catch( (error) => {
+            console.log( error )
+          } )
+
          if( this.TxtSearch === ''){
-           return this.filmData
+           return this.filmCards
          }
        else{
-         return this.filmData.filter( (elem) => {
+         return this.filmCards.filter( (elem) => {
            return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
          } )
        }
      },
+
+  // filteredTv(){
+  //     this.ApiSearch = 'https://api.themoviedb.org/3/search/movie?api_key= ' + this.ApiKey + '&language=it&query=' + this.TxtSearch + '&page=1'
+  //     console.log(this.ApiSearch)
+
+  //   axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=it&query=Star war&page=1'  )
+  //        .then( ( res )=>{
+  //          console.log(res.data.results );
+  //          this.filmCards = res.data.results
+  //         console.log(this.filmCards );
+  //         console.log(this.filmCards[0].original_title)
+  //        } )
+  //         .catch( (error) => {
+  //           console.log( error )
+  //         } )
+
+  //        if( this.TxtSearch === ''){
+  //          return this.filmCards
+  //        }
+  //      else{
+  //        return this.filmCards.filter( (elem) => {
+  //          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+  //        } )
+  //      }
+  //    },
+
+
   },
 // NOTE non me lo usa come computed
+// FIXME da capire come usare il computed
 
-  // Computed: {
+  computed: {
+
+
+  }
+  // computed: {
   //      filteredCards(){
   //        if( this.TxtSearch === ''){
   //          return this.filmData
@@ -314,7 +376,7 @@ box-sizing: border-box}
 
 main{
       width: 100%;
-      height: 93vh;
+      height: 100%;
       background-color: grey;
       padding: 100px;
       color: white;
@@ -333,9 +395,9 @@ main{
 .movie_card{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-        margin-top: 1em;
-        margin-bottom: 1em;
+  justify-content: start;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 </style>

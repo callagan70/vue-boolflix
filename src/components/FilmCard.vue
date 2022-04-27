@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// import cardstyle from '../assets/style/cardstyle.scss'
 export default {
   //Cambiare il nome con quello del componente creato
   name: 'FilmCard',
@@ -29,13 +30,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/style/cardstyle.scss'
 
-      #card{
-          width: 200px;
-          text-align: center;
-          background: black;
+      // #card{
+      //   width: 200px;
+      //   text-align: center;
+      //   background: black;
+      //   margin-top: 1em;
+      //   margin-right: 1em;
 
-
-      }
+      // }
 
 </style>
