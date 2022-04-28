@@ -28,9 +28,6 @@ export default {
       searchText: '',
       }},
 }
-
-
-
 </script>
 
 <style scoped lang="scss">

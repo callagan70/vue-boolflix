@@ -44,6 +44,7 @@ import FilmCard from './components/FilmCard.vue'
 import TvCard from './components/TvCard.vue'
 import axios from 'axios'
 
+// SECTION Inizio export default
 export default {
   components: {
     HeaderComp,
@@ -56,86 +57,129 @@ export default {
     return{
     TxtSearch: '',
     ApiKey: '6eadd5a081c4535630e8571051049891',
+    ApiSearch: 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1',
     filmCards: [],
     TvCards:[],
   }
 },
+computed: {
+
+//   metodoSearch(testo){
+//      // axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=${testo}&page=1' )
+//      axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=star&page=1' )
+//        .then( ( res )=>{
+//          this.filmCards = res.data.results
+//              console.log(this.filmCards );
+//              console.log(this.filmCards[2].original_title)
+//          } )
+
+//      axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=en&query=star&page=1' )
+//        .then( ( res )=>{
+//          this.TvCards = res.data.results
+//              // console.log(this.TvCards );
+//              // console.log(this.TvCards[2].name)
+//          } )
+
+//      this.TxtSearch = testo
+// },
+
+  // filterMovies(){
+  //  if (this.TxtSearch === " " ) {
+  //    console.log(this.TxtSearch)
+  //  return this.filmCards;
+  //  }
+  //    else{
+  //        return this.filmCards.filter( (elem) => {
+  //          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+  //        } )
+  //     }
+  //  },
+
+  // filterTv(){
+  // if (this.TxtSearch === " " ) {
+  //   console.log(this.TxtSearch)
+  //   return this.filmCards;
+  // }
+  //   else{
+  //       return this.TvCards.filter( (elem) => {
+  //         return elem.name.toLowerCase().includes(this.TxtSearch.toLowerCase())
+  //       } )
+  //     }
+
+  //   }
+},
 
 created(){
-  axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1' )
-        .then( ( res )=>{
-          this.filmCards = res.data.results
-            console.log(this.filmCards );
-            console.log(this.filmCards[2].original_title)
-         //  this.Cards = false
-        } )
+  // axios.get( 'https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1' )
+  //       .then( ( res )=>{
+  //         this.filmCards = res.data.results
+  //           // console.log(this.filmCards );
+  //           // console.log(this.filmCards[2].original_title)
+  //       } )
 
-   axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1' )
-        .then( ( res )=>{
-          this.TvCards = res.data.results
-            console.log(this.TvCards );
-            console.log(this.TvCards[2].name)
-         //  this.Cards = false
-        } )
-        .catch( (error) => {
-          console.log( error )
-        } )
+  //  axios.get( 'https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=en&query=Star&page=1' )
+  //       .then( ( res )=>{
+  //         this.TvCards = res.data.results
+  //           // console.log(this.TvCards );
+  //           // console.log(this.TvCards[2].name)
+  //       } )
+  //       .catch( (error) => {
+  //         console.log( error )
+  //       } )
  },
 
+
+// SECTION Inizio methods
 methods:{
- metodoSearch(testo){
-   this.TxtSearch = testo
-  },
 
-  filterMovies(){
-  if (this.TxtSearch === " " ) {
-    console.log(this.TxtSearch)
+metodoSearch(testo){
+    axios.get( `https://api.themoviedb.org/3/search/movie?api_key=6eadd5a081c4535630e8571051049891&language=en&query=${testo}&page=1` )
+       .then( ( res )=>{
+         this.filmCards = res.data.results
+             console.log(this.filmCards );
+             console.log(this.filmCards[2].original_title)
+         } )
+
+    axios.get( `https://api.themoviedb.org/3/search/tv?api_key=6eadd5a081c4535630e8571051049891&language=en&query=${testo}&page=1` )
+       .then( ( res )=>{
+         this.TvCards = res.data.results
+             // console.log(this.TvCards );
+             // console.log(this.TvCards[2].name)
+         } )
+
+     this.TxtSearch = testo
+},
+
+   filterMovies(){
+    if (this.TxtSearch === " " ) {
+     console.log(this.TxtSearch)
     return this.filmCards;
-  }
-    else{
-        return this.filmCards.filter( (elem) => {
-          return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
-        } )
-      }
-
+    }
+      else{
+          return this.filmCards.filter( (elem) => {
+            return elem.original_title.toLowerCase().includes(this.TxtSearch.toLowerCase())
+          } )
+       }
     },
 
-  filterTv(){
-  if (this.TxtSearch === " " ) {
-    console.log(this.TxtSearch)
-    return this.filmCards;
-  }
-    else{
-        return this.TvCards.filter( (elem) => {
-          return elem.name.toLowerCase().includes(this.TxtSearch.toLowerCase())
-        } )
-      }
+   filterTv(){
+   if (this.TxtSearch === " " ) {
+     console.log(this.TxtSearch)
+     return this.filmCards;
+   }
+     else{
+         return this.TvCards.filter( (elem) => {
+           return elem.name.toLowerCase().includes(this.TxtSearch.toLowerCase())
+         } )
+       }
 
-    }
-
+     }
  },
-
-// Computed: {
-
-// metodoSearch(){
-//   if (this.TxtSearch === " " ) {
-//     // mostra lista completa
-//     return this.filmCards;
-//   }
-
-//     return this.filmCards.filter((item) => {
-//     // il .filter crea un array con gli elementi che vengono verificati
-//       return item.original_title
-//         .toLowCase()
-//         .includes(this.filmCards.toLowCase());
-//     });
-//   },
-// }
-
-
+//  !SECTION Fine methods
 
 // !SECTION Fine Export default
 }
+
 </script>
 
 
